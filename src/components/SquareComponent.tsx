@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {FC} from 'react';
+import {Square} from "../models/Square";
 
-const SquareComponent = () => {
+interface SquareProps {
+    square: Square
+}
+
+const SquareComponent: FC<SquareProps> = ({square}) => {
     return (
-        <div className='square'>
+        <div className={['square, square.color'].join('')}>
 
         </div>
     );

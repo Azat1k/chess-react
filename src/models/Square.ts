@@ -11,7 +11,7 @@ export class Square {
     available: boolean;
     id: number;
 
-    constructor (board: Board, x: number, y: number, color: Colors, figure: Figures) {
+    constructor (board: Board, x: number, y: number, color: Colors, figure: Figures | null) {
         this.x = x;
         this.y = y;
         this.color = color;
