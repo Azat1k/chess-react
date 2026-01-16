@@ -31,6 +31,22 @@ export class Board {
         return this.squares[y][x]
     }
 
+    public highlightSquares (selectedSquare: Square | null) {
+        for (let i = 0; i < this.squares.length; i++) {
+            const row = this.squares[i]
+            for (let j = 0; j < row.length; j++) {
+                const target = row[j]
+                target.available = !!selectedSquare?.figure?.canMove(target)
+            }
+        }
+    }
+
+    public getCopyBoard(): Board {
+        const newBoard = new Board()
+        newBoard.squares = this.squares
+        return newBoard
+    }
+
     private addKing() {
         new King(Colors.black, this.getSquares(4, 0))
         new King(Colors.white, this.getSquares(4, 7))

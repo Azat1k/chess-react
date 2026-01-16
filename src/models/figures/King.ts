@@ -11,4 +11,7 @@ export class King extends Figures {
         this.logo = color === Colors.black ? blackLogo : whiteLogo;
         this.name = FigureNames.KING
     }
+    canMove(target: Square): boolean {
+        return super.canMove(target);
+    }
 }

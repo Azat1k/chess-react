@@ -11,4 +11,7 @@ export class Rook extends Figures {
         this.logo = color === Colors.black ? blackLogo : whiteLogo;
         this.name = FigureNames.ROOK
     }
+    canMove(target: Square): boolean {
+        return super.canMove(target);
+    }
 }

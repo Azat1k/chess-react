@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Board} from "../models/Board";
 import {Square} from "../models/Square";
 import SquareComponent from "./SquareComponent";
@@ -13,10 +13,29 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard}) => {
     const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
 
     function click (square: Square) {
-        if (square.figure){
-            setSelectedSquare(square)
+        if (selectedSquare && selectedSquare !== square && selectedSquare.figure?.canMove(square)) {
+            selectedSquare.moveFigure(square);
+            setSelectedSquare(null);
+        } else {
+            setSelectedSquare(square);
         }
+
     }
+
+    useEffect(() => {
+        highlightSquares()
+    }, [selectedSquare])
+
+    function highlightSquares() {
+        board.highlightSquares(selectedSquare)
+        updateBoard()
+    }
+
+    function updateBoard () {
+        const newBoard = board.getCopyBoard ()
+        setBoard(newBoard)
+    }
+
     return (
         <div className='board'>
             {board.squares.map((row , index) =>

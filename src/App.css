@@ -4,6 +4,7 @@
 }
 
 .app {
+    background-color: rgba(30,30,47,0.98);
     width:  100vw;
     height: 100vh;
     display:  flex;
@@ -12,29 +13,56 @@
 }
 
 .board {
-    width:  calc(64px*8);
-    height:  calc(64px*8);
-    display:  flex;
-    flex-wrap: wrap;
+    width: 100vw;   /* 80% ширины окна */
+    height: 100vw;  /* квадратная доска */
+    max-width: 600px; /* ограничение максимального размера */
+    max-height: 600px;
+    margin: 0 auto;  /* по центру */
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
 }
 
 .square {
-    width: 64px;
-    height: 64px;
+    position: relative;
+    width: 84px;
+    height: 84px;
     display:  flex;
     justify-content: center;
     align-items: center;
 }
 
-.cell img {
-    width: 48px;
-    height:  48px;
+.underAttack {
+    background: green;
+}
+
+.square img {
+    width: 74px;
+    height:  74px;
     position: relative;
 }
 
-.selected {
-    background-color: aqua;
-    opacity: 0.5;
+.square::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 255, 255, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+    z-index: 1;
+}
+
+.square.selected::after {
+    opacity: 1;
+}
+
+.available {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: darkgreen;
+    transition: opacity 0.3s;
 }
 
 .black {

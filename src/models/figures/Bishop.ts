@@ -11,4 +11,8 @@ export class Bishop extends Figures {
         this.logo = color === Colors.black ? blackLogo : whiteLogo;
         this.name = FigureNames.BISHOP
     }
+
+    canMove(target: Square): boolean {
+        return super.canMove(target);
+    }
 }

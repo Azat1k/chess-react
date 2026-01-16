@@ -28,8 +28,9 @@ export class Figures {
         this.id = Math.random()
     }
 
-    canMove (target: Square): boolean {
-        return true
+    canMove(target: Square): boolean {
+        return !(target.figure?.color === this.color ||
+            target.figure?.name === FigureNames.KING);
     }
 
     moveFigure (target: Square): boolean {
