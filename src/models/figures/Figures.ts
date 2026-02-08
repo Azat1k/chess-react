@@ -1,6 +1,7 @@
 import {Colors} from "../Colors";
 import {Square} from "../Square";
 import logo from '../../assets/white-king.png'
+import {Board} from "../Board";
 
 export enum FigureNames {
     FIGURE = 'Фигура',
@@ -18,6 +19,7 @@ export class Figures {
     square: Square;
     name: FigureNames;
     id: number;
+    board: Board;
 
     constructor(color: Colors, square: Square) {
         this.color = color;
@@ -26,6 +28,7 @@ export class Figures {
         this.logo = null
         this.name = FigureNames.FIGURE
         this.id = Math.random()
+        this.board = square.board;
     }
 
     canMove(target: Square): boolean {

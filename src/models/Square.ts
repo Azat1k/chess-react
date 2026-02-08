@@ -21,10 +21,19 @@ export class Square {
         this.id = Math.random()
     }
 
+    isEmpty(){
+        return this.figure === null;
+    }
+
+    setFigure (figure: Figures) {
+        this.figure = figure;
+        this.figure.square = this;
+    }
+
     moveFigure (target: Square) {
         if (this.figure && this.figure?.canMove(target)) {
             this.figure?.moveFigure(target);
-            target.figure = this.figure;
+            target.setFigure(this.figure);
             this.figure = null;
         }
     }

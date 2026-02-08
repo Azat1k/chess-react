@@ -3,6 +3,7 @@ import {Colors} from "../Colors";
 import {Square} from "../Square";
 import blackLogo from '../../assets/black-rook.png'
 import whiteLogo from '../../assets/white-rook.png'
+import {Board} from "../Board";
 
 export class Rook extends Figures {
 
@@ -11,7 +12,5 @@ export class Rook extends Figures {
         this.logo = color === Colors.black ? blackLogo : whiteLogo;
         this.name = FigureNames.ROOK
     }
-    canMove(target: Square): boolean {
-        return super.canMove(target);
-    }
+
 }

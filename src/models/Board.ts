@@ -43,10 +43,58 @@ export class Board {
 
     public getCopyBoard(): Board {
         const newBoard = new Board()
-        newBoard.squares = this.squares
+        newBoard.squares = this.squares.map(row => row.map(square => square));
         return newBoard
     }
+    public getVerticalPath(from: Square, to: Square): Square[] | null {
+        if (from.x !== to.x) return null;
 
+        const path: Square[] = [];
+        const min = Math.min(from.y, to.y);
+        const max = Math.max(from.y, to.y);
+
+        for (let y = min + 1; y < max; y++) {
+            path.push(this.getSquares(from.x, y));
+        }
+
+        return path;
+    }
+
+    public getHorizontalPath(from: Square, to: Square): Square[] | null {
+        if (from.y !== to.y) return null;
+
+        const path: Square[] = [];
+        const min = Math.min(from.x, to.x);
+        const max = Math.max(from.x, to.x);
+
+        for (let x = min + 1; x < max; x++) {
+            path.push(this.getSquares(x, from.y));
+        }
+
+        return path;
+    }
+
+    public getDiagonalPath(from: Square, to: Square): Square[] | null {
+        const dx = Math.abs(from.x - to.x);
+        const dy = Math.abs(from.y - to.y);
+
+        if (dx !== dy) return null;
+
+        const path: Square[] = [];
+        const xDirection = from.x < to.x ? 1 : -1;
+        const yDirection = from.y < to.y ? 1 : -1;
+
+        let x = from.x + xDirection;
+        let y = from.y + yDirection;
+
+        while (x !== to.x && y !== to.y) {
+            path.push(this.getSquares(x, y));
+            x += xDirection;
+            y += yDirection;
+        }
+
+        return path;
+    }
     private addKing() {
         new King(Colors.black, this.getSquares(4, 0))
         new King(Colors.white, this.getSquares(4, 7))
